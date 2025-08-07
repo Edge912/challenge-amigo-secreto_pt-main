@@ -17,6 +17,44 @@ function adicionarAmigo() {
 
     // Limpa o campo de entrada
     input.value = "";
+
+    // Atualiza a lista de amigos na tela
+    atualizarListaAmigos();
 }
 
+function atualizarListaAmigos() {
+    // Obtém o elemento da lista
+    let lista = document.getElementById('listaAmigos');
 
+    // Limpa a lista existente
+    lista.innerHTML = "";
+    
+    // Percorre o array e adiciona cada amigo como <li>
+    for (let i = 0; i < amigos.length; i++) {
+        let li = document.createElement('li');
+        li.textContent = amigos[i];
+        lista.appendChild(li);
+    }
+}
+
+function sortearAmigo() {
+    // Valida se há amigos no array
+    if (amigos.length === 0) {
+        alert("Adicione pelo menos um amigo para sortear.");
+        return;
+    }
+
+    // Gera um índice aleatório
+    let indiceSorteado = Math.floor(Math.random() * amigos.length);
+
+    // Obtém o nome sorteado
+    let nomeSorteado = amigos[indiceSorteado];
+
+    // Mostra o resultado na tela
+    let resultado = document.getElementById('resultado');
+    resultado.innerHTML = `<li> O amigo secreto sorteado foi: ${nomeSorteado}!</li>`;
+
+    // Oculta a lista de amigos
+    let lista = document.getElementById('listaAmigos');
+    lista.style.display = "none";
+}
